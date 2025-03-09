@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Carrossel de Imagens com Música</title>
+    <style>
+        /* Estilos básicos para a página */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Corações flutuantes */
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: fall 4s ease-in infinite;
+            opacity: 0.8;
+            color: red;
+        }
+
+        /* Animação de queda dos corações */
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0.8;
+            }
+        }
+
+        /* Animação de subida dos corações */
+        @keyframes rise {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0.8;
+            }
+        }
+
+        /* Estilo do carrossel */
+        .container {
+            width: 90%;
+            max-width: 500px; /* Largura máxima do carrossel */
+            position: relative;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 900px; /* Ajustei para que as imagens se encaixem melhor */
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-images .image-container {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .carousel-images img {
+            width: 100%;  /* As imagens agora ocupam 100% da largura do carrossel */
+            height: 100%;  /* As imagens ocupam 100% da altura do carrossel */
+            object-fit: contain;  /* As imagens irão se ajustar dentro do carrossel sem distorcer */
+            border-radius: 15px;
+        }
+
+        /* Estilo das legendas */
+        .caption {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        /* Botões de navegação */
+        .nav-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .nav-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Estilo para o iframe de música invisível */
+        iframe {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Corações flutuantes -->
+    <div class="heart" style="left: 10%; animation-duration: 3s; animation-delay: 0s;">❤️</div>
+    <div class="heart" style="left: 20%; animation-duration: 4s; animation-delay: 1s;">❤️</div>
+    <div class="heart" style="left: 30%; animation-duration: 4s; animation-delay: 2s;">❤️</div>
+    <div class="heart" style="left: 40%; animation-duration: 3.5s; animation-delay: 3s;">❤️</div>
+    <div class="heart" style="left: 50%; animation-duration: 4.5s; animation-delay: 0s;">❤️</div>
+    <div class="heart" style="left: 60%; animation-duration: 3s; animation-delay: 1s;">❤️</div>
+    <div class="heart" style="left: 70%; animation-duration: 5s; animation-delay: 2s;">❤️</div>
+    <div class="heart" style="left: 80%; animation-duration: 4s; animation-delay: 3s;">❤️</div>
+    <div class="heart" style="left: 90%; animation-duration: 3.5s; animation-delay: 1s;">❤️</div>
+
+    <!-- Carrossel de Imagens -->
+    <div class="container">
+        <div class="carousel">
+            <div class="carousel-images">
+                <div class="image-container">
+                    <img src="limpinho.jpeg" alt="Imagem 1">
+                    <div class="caption">É LIMPINHO</div>
+                </div>
+                <div class="image-container">
+                    <img src="peludinho.jpeg" alt="Imagem 2">
+                    <div class="caption">É PELUDINHO</div>
+                </div>
+                <div class="image-container">
+                    <img src="corajoso.jpeg" alt="Imagem 3">
+                    <div class="caption">É CORAJOSO</div>
+                </div>
+                <div class="image-container">
+                    <img src="sorriso.jpeg" alt="Imagem 4">
+                    <div class="caption">TEM UM LINDO SORRISO</div>
+                </div>
+                <div class="image-container">
+                    <img src="sedutor.jpeg" alt="Imagem 5">
+                    <div class="caption">É SEDUTOR</div>
+                </div>
+                <div class="image-container">
+                    <img src="rabo.jpeg" alt="Imagem 6">
+                    <div class="caption">TEM UM RABÃO</div>
+                </div>
+                <div class="image-container">
+                    <img src="agua.jpeg" alt="Imagem 7">
+                    <div class="caption">É UMA FONTE DE AGUA PARA AFRICA</div>
+                </div>
+            </div>
+
+            <!-- Botões de navegação -->
+            <div class="nav-buttons">
+                <button class="nav-button" id="prevBtn">&#10094;</button>
+                <button class="nav-button" id="nextBtn">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Música do YouTube -->
+    <iframe id="musicFrame" width="0" height="0" src="https://www.youtube.com/embed/KU5o6M7S5nQ?autoplay=1&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    <script>
+        // Função do carrossel
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel-images .image-container');
+        const totalImages = images.length;
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Função para mostrar a imagem correta
+        function updateCarousel() {
+            const newTransformValue = `translateX(-${currentIndex * 100}%)`;
+            document.querySelector('.carousel-images').style.transform = newTransformValue;
+        }
+
+        // Navegação para a imagem anterior
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === 0) ? totalImages - 1 : currentIndex - 1;
+            updateCarousel();
+        });
+
+        // Navegação para a próxima imagem
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex === totalImages - 1) ? 0 : currentIndex + 1;
+            updateCarousel();
+        });
+    </script>
+
+</body>
+</html>
